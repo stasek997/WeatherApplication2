@@ -1,5 +1,6 @@
 package com.weatherapplication.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,63 +33,59 @@ class MainActivityViewModel @Inject constructor(
     val progressBarLiveData = MutableLiveData<Boolean>()
 
     init {
-       val cashedCity = cityId
+        val cashedCity = cityId
         if (cashedCity != null) {
             getWeatherInfo(cashedCity.id)
 
         }
     }
-    fun getWeatherInfo(cityId: Int) = viewModelScope.launch(Dispatchers.Main){
+
+    fun getWeatherInfo(cityId: Int) = viewModelScope.launch{
         progressBarLiveData.postValue(true)
-           withContext(Dispatchers.IO) {
-               try {
-                   val data = repository.getWeatherInfo(cityId)
-                   val weatherData = WeatherData(
-                       dateTime = data.dt.unixTimestampToDateTimeString(),
-                       temperature = data.main.temp.kelvinToCelsius().toString(),
-                       cityAndCountry = "${data.name}, ${data.sys.country}",
-                       weatherConditionIconUrl = "http://openweathermap.org/img/w/${data.weather[0].icon}.png",
-                       weatherConditionIconDescription = data.weather[0].description,
-                       humidity = "${data.main.humidity}%",
-                       pressure = "${data.main.pressure} mBar",
-                       visibility = "${data.visibility / 1000.0} KM",
-                       sunrise = data.sys.sunrise.unixTimestampToTimeString(),
-                       sunset = data.sys.sunset.unixTimestampToTimeString()
-                   )
+       withContext(Dispatchers.IO) {
+            try {
+                val data = repository.getWeatherInfo(cityId)
 
-                   withContext(Dispatchers.Main){
-                       progressBarLiveData.postValue(false) // PUSH data to LiveData object to hide progress bar
+                val weatherData = WeatherData(
+                    dateTime = data.dt.unixTimestampToDateTimeString(),
+                    temperature = data.main.temp.kelvinToCelsius().toString(),
+                    cityAndCountry = "${data.name}, ${data.sys.country}",
+                    weatherConditionIconUrl = "http://openweathermap.org/img/w/${data.weather[0].icon}.png",
+                    weatherConditionIconDescription = data.weather[0].description,
+                    humidity = "${data.main.humidity}%",
+                    pressure = "${data.main.pressure} mBar",
+                    visibility = "${data.visibility / 1000.0} KM",
+                    sunrise = data.sys.sunrise.unixTimestampToTimeString(),
+                    sunset = data.sys.sunset.unixTimestampToTimeString()
+                )
 
-                       // After applying business logic and data manipulation, we push data to show on UI
-                       weatherInfoLiveData.postValue(weatherData)
-                   }
+                weatherInfoLiveData.postValue(weatherData)
+                progressBarLiveData.postValue(false) // PUSH data to LiveData object to hide progress bar
 
-               }
 
-               catch (e: Exception){
+            } catch (e: Exception) {
 
-                   val errorMessage = e.localizedMessage.orEmpty()
+                val errorMessage = e.localizedMessage.orEmpty()
 
-                   progressBarLiveData.postValue(false) // hide progress bar
-                   weatherInfoFailureLiveData.postValue(errorMessage) // PUSH error message to LiveData object
-               }
+                progressBarLiveData.postValue(false) // hide progress bar
+                weatherInfoFailureLiveData.postValue(errorMessage) // PUSH error message to LiveData object
+            } catch (e: CancellationException) {
 
-               catch (e: CancellationException){
+                val errorMessage = e.localizedMessage.orEmpty()
 
-                   val errorMessage = e.localizedMessage.orEmpty()
-
-                   progressBarLiveData.postValue(false) // hide progress bar
-                   weatherInfoFailureLiveData.postValue(errorMessage) // PUSH error message to LiveData object
-               }
-           }
+                progressBarLiveData.postValue(false) // hide progress bar
+                weatherInfoFailureLiveData.postValue(errorMessage) // PUSH error message to LiveData object
+            }
+        }
 
     }
+
     private val cityId: City?
-        get () = prefs.city
+        get() = prefs.city
 
 
     val dayNightMode: Int
-        get () = prefs.dayNightMode
+        get() = prefs.dayNightMode
 
 
 }

@@ -1,26 +1,28 @@
 package com.weatherapplication.repository
 
 
-import com.google.gson.GsonBuilder
+import android.content.res.AssetManager
+import com.google.gson.Gson
+
 import com.google.gson.reflect.TypeToken
-import com.weatherapplication.WeatherApp
+
 import com.weatherapplication.data.City
 import com.weatherapplication.data.WeatherModelDTO
 import com.weatherapplication.network.WeatherApiInterface
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
+
+import java.lang.reflect.Type
 
 
 class WeatherRepositoryImpl constructor (
-    private val context: WeatherApp,
-    private val apiInterface: WeatherApiInterface
+    private val assets: AssetManager,
+    private val apiInterface: WeatherApiInterface,
+    private val gson: Gson,
+    private val type: Type
 ): WeatherRepository {
 
     override suspend fun getCityList(): MutableList<City> {
 
-            val stream = context.assets.open("city_list.json")
+            val stream = assets.open("city_list.json")
 
             val size = stream.available()
             val buffer = ByteArray(size)
@@ -28,9 +30,7 @@ class WeatherRepositoryImpl constructor (
             stream.close()
             val tContents = String(buffer)
 
-            val groupListType = object : TypeToken<ArrayList<City>>() {}.type
-            val gson = GsonBuilder().create()
-            val cityList: MutableList<City> = gson.fromJson(tContents, groupListType)
+            val cityList: MutableList<City> = gson.fromJson(tContents, type)
 
             return cityList//let presenter know the city list
 

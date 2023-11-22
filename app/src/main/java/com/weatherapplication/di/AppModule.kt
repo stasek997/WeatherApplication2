@@ -1,7 +1,10 @@
 package com.weatherapplication.di
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.weatherapplication.WeatherApp
+import com.weatherapplication.data.City
 import com.weatherapplication.network.WeatherApiInterface
 import com.weatherapplication.repository.WeatherRepository
 import com.weatherapplication.repository.WeatherRepositoryImpl
@@ -38,12 +41,17 @@ object AppModule {
 
    @Provides
   fun provideWeatherRepository(
-       context: WeatherApp, apiInterface: WeatherApiInterface
+       context: WeatherApp, apiInterface: WeatherApiInterface, gson: Gson
   ): WeatherRepository {
         return WeatherRepositoryImpl(
-            context, apiInterface
+            context.assets, apiInterface, gson, object : TypeToken<ArrayList<City>>() {}.type
         )
     }
+
+    @Provides
+    fun provideGson() = Gson()
+
+
 
     @Singleton
     @Provides

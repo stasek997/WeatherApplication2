@@ -17,6 +17,8 @@ class AddScreenViewModel @Inject constructor(
     private val prefs: WeatherPref
 ) : ViewModel() {
 
+
+
     val cityListLiveData = MutableLiveData<MutableList<City>>()
     val cityListFailureLiveData = MutableLiveData<String>()
 
