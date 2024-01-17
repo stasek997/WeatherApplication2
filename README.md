@@ -1,3 +1,5 @@
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Certificate.png">
+
 <h1 align="center"> Weather Application</a>
 <h1 align="center"> Приложение прогноз погоды</a>
 <h1 align="center"> Цель приложения:</a>
