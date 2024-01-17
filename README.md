@@ -12,3 +12,9 @@
 <h1 align="center"> Использованные API:</a>
 <h1 align="center"> API погоды - openweathermap.org</a>
 <h1 align="center"> Secret Plugin.</a>
+
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Screenshot_20240117_144241.png">
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Screenshot_20240117_144305.png">
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Screenshot_20240117_144333.png">
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Screenshot_20240117_144346.png">
+<img src="https://github.com/stasek997/WeatherApplication2/blob/master/app/src/main/Screenshot_20240117_144617.png">
