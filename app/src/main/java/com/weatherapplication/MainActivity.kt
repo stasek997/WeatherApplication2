@@ -67,46 +67,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-      //  private lateinit var binding: ActivityMainBinding
-      //  override fun onCreate(savedInstanceState: Bundle?) {
-        //    super.onCreate(savedInstanceState)
-
-          //  binding = ActivityMainBinding.inflate(layoutInflater)
-           // setContentView(binding.root)
-       // }
-   // }
-//private fun setupObservers() {
-  //  viewModel.getAll()
-
-    //viewModel.databaseData.observe(this) { newData ->
-      //  mainRecyclerViewAdapter?.differ?.submitList(newData)
-    //}
-//}
-
-//private fun setupViews() {
-  //  mainRecyclerViewAdapter = ItemsListAdapter(
-    //    context = requireContext(),
-      //  increaseItemAmountInStorage = { item ->
-        //    viewModel.updateItem(item)
-        //},
-        //decreaseItemAmountInStorage = { item ->
-           // viewModel.updateItem(item)
-        //},
-        //canButtonClick = { item ->
-          //  viewModel.deleteItem(item)
-        //},
-        //onUpdateItemClick = { shoppingItem ->
-          //  viewModel.setActiveId(shoppingItem.id)
-           // findNavController().navigate(R.id.action_mainScreenFragment_to_addItemFragment)
-        //}
-   // )
-
-    //binding.recyclerView.adapter = mainRecyclerViewAdapter
-    //binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-    //binding.addItemButton.setOnClickListener {
-      //  findNavController().navigate(R.id.action_mainScreenFragment_to_addItemFragment)
-    //}
 
 
 

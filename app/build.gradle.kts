@@ -3,7 +3,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 
@@ -18,8 +18,8 @@ android {
 
 
         applicationId = "com.example.weatherapplication"
-        minSdk = 31
-        targetSdk = 34
+        minSdk = 26
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -46,19 +46,15 @@ android {
     }
     buildFeatures {
         buildConfig = true
-        dataBinding = true
         viewBinding = true
     }
 
 }
 
 
-kapt {
-    correctErrorTypes = true
-}
 
 dependencies {
-    val fragment_version = "1.6.1"
+
 
 // For Kotlin use core-ktx
 
@@ -69,10 +65,10 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-    implementation ("androidx.navigation:navigation-dynamic-features-fragment:2.7.5")
+    implementation("com.google.dagger:hilt-android:2.49")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation ("androidx.navigation:navigation-dynamic-features-fragment:2.7.6")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -82,12 +78,12 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // JSON parsing library
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    ksp("com.google.dagger:hilt-android-compiler:2.49")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
 
 
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("com.google.android.material:material:1.12.0-alpha01")
+    implementation("com.google.android.material:material:1.12.0-alpha02")
 
 
     testImplementation ("junit:junit:4.13.2")
@@ -98,7 +94,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("org.robolectric:robolectric:4.2.1")
+    testImplementation("org.robolectric:robolectric:4.11.1")
     testImplementation("com.google.truth:truth:1.1.3")
 
 }

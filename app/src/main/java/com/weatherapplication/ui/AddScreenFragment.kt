@@ -40,8 +40,6 @@ class AddScreenFragment : Fragment() {
 
     private val viewModel by viewModels<AddScreenViewModel>()
 
-    // @Inject
-    //  lateinit var pref: WeatherPref
 
 
     override fun onCreateView(
